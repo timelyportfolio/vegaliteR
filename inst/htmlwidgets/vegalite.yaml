@@ -10,4 +10,4 @@ dependencies:
   - name: vega-lite
     version: 0.8.3
     src: htmlwidgets/lib/vega-lite
-    script: vega-lite.js
+    script: vega-lite.min.js
