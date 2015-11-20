@@ -74,3 +74,20 @@ vegalite(
   )
 )
 }
+
+
+
+library(V8)
+
+ctx <- new_context(global = "module")
+ctx$source("https://rawgit.com/vega/vega-lite/master/gallery/examples.js")
+specs <- ctx$get("EXAMPLES",simplifyDataFrame = FALSE)
+
+vegalite(specs[[1]]$spec)
+
+# if data not in json file could do this
+library(htmltools)
+
+browsable(tagList(
+  lapply(specs,vegalite)
+))
