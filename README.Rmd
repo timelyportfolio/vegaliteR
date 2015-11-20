@@ -22,7 +22,7 @@ vegalite htmlwidget for R
 ## Installation
 
 ```{r eval = FALSE}
-devtools::install_github("/vegaliteR")
+devtools::install_github("yimelyportfolio/vegaliteR")
 ```
 
 ## Usage
@@ -33,4 +33,4 @@ library(vegaliteR)
 
 ## License
 
-MIT + file LICENSE © [Kenton Russell](https://github.com/).
+MIT + file LICENSE © [Kenton Russell](https://github.com/timelyportfolio).
