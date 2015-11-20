@@ -1,0 +1,12 @@
+Package: vegaliteR
+Title: vegalite htmlwidget for R
+Version: 0.0.1
+Author: Kenton Russell
+Maintainer: Kenton Russell <kent.russell@timelyportfolio.com>
+Description: vegalite htmlwidget for R
+License: MIT + file LICENSE
+LazyData: true
+URL: https://github.com/timelyportfolio/vegaliteR
+BugReports: https://github.com/timelyportfolio/vegaliteR/issues
+Suggests: 
+    testthat
