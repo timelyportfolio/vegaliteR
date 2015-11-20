@@ -4,7 +4,7 @@
 \alias{vegalite}
 \title{Vega-lite in R}
 \usage{
-vegalite(spec, width = NULL, height = NULL)
+vegalite(spec, renderer = "svg", width = NULL, height = NULL)
 }
 \description{
 Plot data with vega-lite from R with the convenience of
@@ -56,6 +56,8 @@ spec2 <-   list(
 )
   
 vegalite(spec)
+# render with canvas instead of svg
+vegalite(spec,"canvas")
 vegalite(spec2)
 
 
@@ -87,5 +89,22 @@ vegalite(
   )
 )
 }
+
+
+
+library(V8)
+
+ctx <- new_context(global = "module")
+ctx$source("https://rawgit.com/vega/vega-lite/master/gallery/examples.js")
+specs <- ctx$get("EXAMPLES",simplifyDataFrame = FALSE)
+
+vegalite(specs[[1]]$spec)
+
+# if data not in json file could do this
+library(htmltools)
+
+browsable(tagList(
+  lapply(specs,vegalite)
+))
 }
 

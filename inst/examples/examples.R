@@ -43,6 +43,8 @@ spec2 <-   list(
 )
   
 vegalite(spec)
+# render with canvas instead of svg
+vegalite(spec,"canvas")
 vegalite(spec2)
 
 

@@ -7,11 +7,12 @@
 #' @import htmlwidgets
 #'
 #' @export
-vegalite <- function(spec, width = NULL, height = NULL) {
+vegalite <- function(spec, renderer = "svg", width = NULL, height = NULL) {
 
   # forward options using x
   x = list(
-    spec = spec
+    spec = spec,
+    renderer = renderer
   )
 
   # create widget

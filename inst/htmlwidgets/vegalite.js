@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
     function parse(spec) {
       vg.parse.spec(spec, function(chart) {
-          chart({el:el}).update(); });
+          chart({el:el,renderer:x.renderer}).update(); });
     }
   
     var vgspec = vl.compile(x.spec);
