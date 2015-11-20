@@ -1,12 +1,36 @@
 Package: vegaliteR
 Title: vegalite htmlwidget for R
 Version: 0.0.1
-Author: Kenton Russell
+Date: 2015-11-20
+Authors@R: c(
+      person(
+        "Mike", "Bostock"
+        , role = c("aut", "cph")
+        , comment = "d3.js library in htmlwidgets/lib, http://d3js.org"
+      ),
+      person(
+        "Trifacta, Inc",
+        , role = c("aut", "cph")
+        , comment = "vega library in htmlwidgets/lib, https://github.com/vega/vega"
+      ),
+      person(
+        "UW Interactive Data Lib",
+        , role = c("aut", "cph")
+        , comment = "vega and vega-lite library in htmlwidgets/lib, https://github.com/vega/vega, https://github.com/vega/vega-lite"
+      ),
+      person(
+        "Kent", "Russell"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "kent.russell@timelyportfolio.com"
+      )
+    )
 Maintainer: Kenton Russell <kent.russell@timelyportfolio.com>
 Description: vegalite htmlwidget for R
 License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/timelyportfolio/vegaliteR
 BugReports: https://github.com/timelyportfolio/vegaliteR/issues
-Suggests: 
+Suggests:
     testthat
+RoxygenNote: 4.1.1.9001
