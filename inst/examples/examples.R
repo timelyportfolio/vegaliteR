@@ -46,6 +46,14 @@ spec2 <-   list(
 vegalite(spec)
 # render with canvas instead of svg
 vegalite(spec,"canvas")
+
+# sizing is unfortunately not easy
+#  https://github.com/vega/vega-lite/issues/194
+spec$config$singleHeight = 400
+spec$config$largeBandWidth = 40
+vegalite(spec)
+
+# using an R list instead of JSON
 vegalite(spec2)
 
 
@@ -78,6 +86,78 @@ vegalite(
 )
 
 
+# http://vega.github.io/vega-editor/?mode=vega-lite&spec=stacked_bar
+#  using R barley data
+#{
+#  "data": {"url": "data/barley.json"},
+#  "marktype": "bar",
+#  "encoding": {
+#    "x": {"name": "yield","type": "Q","aggregate": "sum"},
+#    "y": {"name": "variety","type": "N"},
+#    "color": {"name": "site","type": "N"}
+#  }
+#}
+data(barley, package = "lattice")
+#not working
+barley %>>%
+  list.parse %>>%
+  unname %>>%
+  (
+    list(
+      data = list( values = . ),
+      marktype = "bar",
+      encoding = list(
+        y = list(field = "yield", type = "Q", aggregate = "sum"),
+        x = list(field = "variety", type = "N"),
+        color = list(field = "site", type = "N")
+      )
+    )
+  ) %>>%
+  vegalite(width = 500)
+
+#try with the json
+# also not working
+barley2 <- jsonlite::fromJSON("http://vega.github.io/vega-editor/app/data/barley.json",simplifyDataFrame = FALSE)
+barley2 %>>%
+  (
+    list(
+      data = list( values = . ),
+      marktype = "bar",
+      encoding = list(
+        x = list(field = "yield", type = "Q", aggregate = "sum"),
+        y = list(field = "variety", type = "N"),
+        color = list(field = "site", type = "N")
+      )
+    )
+  ) %>>%
+  vegalite(width = 500)
+
+data(Oats, package = "MEMSS")
+Oats %>>%
+  list.parse %>>%
+  unname %>>%
+  (
+    list(
+      data = list(values = .),
+      marktype = "bar",
+      encoding = list(
+        x = list(
+          field = "yield",
+          type = "Q",
+          aggregate = "sum"
+        ),
+        y = list(
+          field = "Variety",
+          type = "N"
+        ),
+        color = list(
+          field = "Block",
+          type = "N"
+        )
+      )
+    )
+  ) %>>%
+  vegalite(width = 400)
 
 
 library(V8)
