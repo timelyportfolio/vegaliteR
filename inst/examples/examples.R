@@ -99,6 +99,7 @@ vegalite(
 #}
 data(barley, package = "lattice")
 #not working
+# see issue https://github.com/vega/vega-lite/issues/783
 barley %>>%
   list.parse %>>%
   unname %>>%
@@ -107,8 +108,25 @@ barley %>>%
       data = list( values = . ),
       marktype = "bar",
       encoding = list(
-        y = list(field = "yield", type = "Q", aggregate = "sum"),
-        x = list(field = "variety", type = "N"),
+        x = list(field = "yield", type = "Q", aggregate = "sum"),
+        y = list(field = "variety", type = "N"),
+        color = list(field = "site", type = "N")
+      )
+    )
+  ) %>>%
+  vegalite(width = 500)
+
+# however when x/y and color are the same, then works fine
+barley %>>%
+  list.parse %>>%
+  unname %>>%
+  (
+    list(
+      data = list( values = . ),
+      marktype = "bar",
+      encoding = list(
+        x = list(field = "yield", type = "Q", aggregate = "sum"),
+        y = list(field = "site", type = "N"),
         color = list(field = "site", type = "N")
       )
     )
