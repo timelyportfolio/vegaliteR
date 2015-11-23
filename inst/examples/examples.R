@@ -1,4 +1,5 @@
 \dontrun{
+  
 library(vegaliteR)
 
 spec <- jsonlite::fromJSON(
@@ -13,8 +14,8 @@ spec <- jsonlite::fromJSON(
   },
   "marktype": "bar",
   "encoding": {
-    "x": {"type": "O","name": "x"},
-    "y": {"type": "Q","name": "y"}
+    "y": {"type": "quantitative", "field": "y"},
+    "x": {"type": "ordinal", "field": "x"}
   }
 }
 ' ,
@@ -37,8 +38,8 @@ spec2 <-   list(
   ),
   "marktype" = "bar",
   "encoding" = list(
-    "x" = list("type" = "O","name" = "a"),
-    "y" = list("type" = "Q","name" = "b")
+    "x" = list("type" = "ordinal","field" = "a"),
+    "y" = list("type" = "quantitative","field" = "b")
   )
 )
   
@@ -70,12 +71,12 @@ vegalite(
     ),
     marktype = "bar",
     encoding = list(
-      "x" = list("name" = "cyl","type" = "O"),
-      "y" = list("name" = "qsec","type" = "Q",aggregate = "mean")
+      "x" = list("field" = "cyl","type" = "O"),
+      "y" = list("field" = "qsec","type" = "Q",aggregate = "mean")
     )
   )
 )
-}
+
 
 
 
@@ -93,3 +94,7 @@ library(htmltools)
 browsable(tagList(
   lapply(specs,vegalite)
 ))
+
+
+}
+

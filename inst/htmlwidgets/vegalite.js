@@ -16,8 +16,18 @@ HTMLWidgets.widget({
       vg.parse.spec(spec, function(chart) {
           chart({el:el,renderer:x.renderer}).update(); });
     }
-  
-    var vgspec = vl.compile(x.spec);
+    
+    /*
+    x.spec.config = x.spec.config ? x.spec.config : {};
+    x.spec.config.singleWidth = x.spec.config.singleWidth ? 
+          x.spec.config.singleWidth : 
+          el.getBoundingClientRect().width - 30;    
+    x.spec.config.singleHeight = x.spec.config.singleHeight ? 
+          x.spec.config.singleHeight : 
+          el.getBoundingClientRect().height - 30;
+          
+    */
+    var vgspec = vl.compile(x.spec).spec;
     parse(vgspec);
 
   },
