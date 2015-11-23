@@ -21,7 +21,7 @@ HTMLWidgets.widget({
     x.spec.config = x.spec.config ? x.spec.config : {};
     x.spec.config.singleWidth = x.spec.config.singleWidth ? 
           x.spec.config.singleWidth : 
-          el.getBoundingClientRect().width - 40;    
+          el.getBoundingClientRect().width - 140;    
     x.spec.config.singleHeight = x.spec.config.singleHeight ? 
           x.spec.config.singleHeight : 
           el.getBoundingClientRect().height - 40;
