@@ -63,27 +63,31 @@ vegalite(spec2)
 library(rlist)
 library(pipeR)
 
-vegalite(
-  list(
-    data = list(
-      values = mtcars %>>%
-                (
-                  data.frame(
-                    name = rownames(.),
-                    .,
-                    stringsAsFactors = FALSE
-                  )
-                ) %>>%
-                list.parse %>>%
-                unname()
-    ),
-    marktype = "bar",
-    encoding = list(
-      "x" = list("field" = "cyl","type" = "O"),
-      "y" = list("field" = "qsec","type" = "Q",aggregate = "mean")
+mtcars %>>%
+  (
+    data.frame(
+      name = rownames(.),
+      .,
+      stringsAsFactors = FALSE
+    )
+  ) %>>%
+  list.parse %>>%
+  unname() %>>%
+  (
+    vegalite(
+      list(
+        data = list(
+          values = .
+        ),
+        marktype = "bar",
+        encoding = list(
+          "x" = list("field" = "cyl","type" = "O"),
+          "y" = list("field" = "qsec","type" = "Q",aggregate = "mean"),
+          "color" = list("field" = "cyl","type" = "O")
+        )
+      )
     )
   )
-)
 
 
 # http://vega.github.io/vega-editor/?mode=vega-lite&spec=stacked_bar
@@ -166,11 +170,11 @@ Oats %>>%
         ),
         y = list(
           field = "Variety",
-          type = "N"
+          type = "nominal"
         ),
         color = list(
           field = "Block",
-          type = "N"
+          type = "nominal"
         )
       )
     )
