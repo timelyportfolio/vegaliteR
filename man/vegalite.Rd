@@ -195,6 +195,24 @@ Oats \%>>\%
   vegalite(width = 400)
 
 
+library(purrr)
+diamonds \%>>\%
+  (.[sample(1:nrow(.),5000),]) \%>>\%
+  by_row(as.list) \%>>\%
+  (.$.out) \%>>\%
+  (
+    list(
+      data = list(values = .),
+      marktype = "line",
+      encoding = list(
+        y = list(field = "price", type = "Q", aggregate = "mean"),
+        x = list(field = "cut", type = "O"),
+        color = list(field = "clarity", type = "nominal")
+      )
+    )
+  ) \%>>\%
+  vegalite(renderer = "canvas")
+
 library(V8)
 
 ctx <- new_context(global = "module")
