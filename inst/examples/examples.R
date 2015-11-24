@@ -109,8 +109,8 @@ barley %>>%
       marktype = "bar",
       encoding = list(
         x = list(field = "yield", type = "Q", aggregate = "sum"),
-        y = list(field = "variety", type = "N"),
-        color = list(field = "site", type = "N")
+        y = list(field = "variety", type = "nominal"),
+        color = list(field = "site", type = "nominal")
       )
     )
   ) %>>%
@@ -126,8 +126,8 @@ barley %>>%
       marktype = "bar",
       encoding = list(
         x = list(field = "yield", type = "Q", aggregate = "sum"),
-        y = list(field = "site", type = "N"),
-        color = list(field = "site", type = "N")
+        y = list(field = "site", type = "nominal"),
+        color = list(field = "site", type = "nominal")
       )
     )
   ) %>>%
@@ -143,8 +143,8 @@ barley2 %>>%
       marktype = "bar",
       encoding = list(
         x = list(field = "yield", type = "Q", aggregate = "sum"),
-        y = list(field = "variety", type = "N"),
-        color = list(field = "site", type = "N")
+        y = list(field = "variety", type = "nominal"),
+        color = list(field = "site", type = "nominal")
       )
     )
   ) %>>%
