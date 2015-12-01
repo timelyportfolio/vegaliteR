@@ -50,7 +50,7 @@ vegalite(spec,"canvas")
 # sizing is unfortunately not easy
 #  https://github.com/vega/vega-lite/issues/194
 spec$config$cell$height = 400
-spec$config$cell$width = 40
+spec$encoding$x$scale$bandWidth = 60
 vegalite(spec)
 
 # using an R list instead of JSON

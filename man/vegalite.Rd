@@ -62,8 +62,8 @@ vegalite(spec,"canvas")
 
 # sizing is unfortunately not easy
 #  https://github.com/vega/vega-lite/issues/194
-spec$config$singleHeight = 400
-spec$config$largeBandWidth = 40
+spec$config$cell$height = 400
+spec$encoding$x$scale$bandWidth = 60
 vegalite(spec)
 
 # using an R list instead of JSON
@@ -115,8 +115,6 @@ mtcars \%>>\%
 #  }
 #}
 data(barley, package = "lattice")
-#not working
-# see issue https://github.com/vega/vega-lite/issues/783
 barley \%>>\%
   list.parse \%>>\%
   unname \%>>\%
@@ -126,14 +124,13 @@ barley \%>>\%
       marktype = "bar",
       encoding = list(
         x = list(field = "yield", type = "Q", aggregate = "sum"),
-        y = list(field = "variety", type = "nominal"),
+        y = list(field = "variety", type = "nominal"), # can use N instead of nominal
         color = list(field = "site", type = "nominal")
       )
     )
   ) \%>>\%
   vegalite(width = 500)
 
-# however when x/y and color are the same, then works fine
 barley \%>>\%
   list.parse \%>>\%
   unname \%>>\%
@@ -151,7 +148,6 @@ barley \%>>\%
   vegalite(width = 500)
 
 #try with the json
-# also not working
 barley2 <- jsonlite::fromJSON("http://vega.github.io/vega-editor/app/data/barley.json",simplifyDataFrame = FALSE)
 barley2 \%>>\%
   (
@@ -226,6 +222,40 @@ library(htmltools)
 
 browsable(tagList(
   lapply(specs,vegalite)
+))
+
+
+# can get json data this way
+# manually
+specs[[3]]$spec$data <- list(
+  values = jsonlite::fromJSON(
+    paste0("http://vega.github.io/vega-editor/app/",specs[[3]]$spec$data$url),
+    simplifyDataFrame = FALSE
+  )
+)
+vegalite(specs[[3]]$spec)
+
+# across all with json data
+specs_local <- lapply(
+  specs,
+  function(spec){
+    if("url" \%in\% names(spec$spec$data)){
+      spec$spec$data <- list(
+        values = jsonlite::fromJSON(
+          paste0(
+            "http://vega.github.io/vega-editor/app/",
+            spec$spec$data$url
+          ),
+          simplifyDataFrame = FALSE
+        )
+      )
+    }
+    spec
+  }
+)
+
+browsable(tagList(
+  lapply(specs_local,function(spec){vegalite(spec$spec)})
 ))
 
 
