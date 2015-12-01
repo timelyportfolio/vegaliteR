@@ -49,8 +49,8 @@ vegalite(spec,"canvas")
 
 # sizing is unfortunately not easy
 #  https://github.com/vega/vega-lite/issues/194
-spec$config$singleHeight = 400
-spec$config$largeBandWidth = 40
+spec$config$cell$height = 400
+spec$config$cell$width = 40
 vegalite(spec)
 
 # using an R list instead of JSON
@@ -102,8 +102,6 @@ mtcars %>>%
 #  }
 #}
 data(barley, package = "lattice")
-#not working
-# see issue https://github.com/vega/vega-lite/issues/783
 barley %>>%
   list.parse %>>%
   unname %>>%
@@ -113,14 +111,13 @@ barley %>>%
       marktype = "bar",
       encoding = list(
         x = list(field = "yield", type = "Q", aggregate = "sum"),
-        y = list(field = "variety", type = "nominal"),
+        y = list(field = "variety", type = "nominal"), # can use N instead of nominal
         color = list(field = "site", type = "nominal")
       )
     )
   ) %>>%
   vegalite(width = 500)
 
-# however when x/y and color are the same, then works fine
 barley %>>%
   list.parse %>>%
   unname %>>%
@@ -138,7 +135,6 @@ barley %>>%
   vegalite(width = 500)
 
 #try with the json
-# also not working
 barley2 <- jsonlite::fromJSON("http://vega.github.io/vega-editor/app/data/barley.json",simplifyDataFrame = FALSE)
 barley2 %>>%
   (

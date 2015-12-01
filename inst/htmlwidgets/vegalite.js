@@ -18,12 +18,13 @@ HTMLWidgets.widget({
     }
     
     
-    x.spec.config = x.spec.config ? x.spec.config : {};
-    x.spec.config.singleWidth = x.spec.config.singleWidth ? 
-          x.spec.config.singleWidth : 
+    x.spec.config = x.spec.config ? x.spec.config : { };
+    x.spec.config.cell = x.spec.config.cell ? x.spec.config.cell : { };
+    x.spec.config.cell.width = x.spec.config.cell.width ? 
+          x.spec.config.cell.width : 
           el.getBoundingClientRect().width - 140;    
-    x.spec.config.singleHeight = x.spec.config.singleHeight ? 
-          x.spec.config.singleHeight : 
+    x.spec.config.cell.height = x.spec.config.cell.height ? 
+          x.spec.config.cell.height : 
           el.getBoundingClientRect().height - 40;
           
 
