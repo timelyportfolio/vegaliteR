@@ -212,5 +212,39 @@ browsable(tagList(
 ))
 
 
+# can get json data this way
+# manually
+specs[[3]]$spec$data <- list(
+  values = jsonlite::fromJSON(
+    paste0("http://vega.github.io/vega-editor/app/",specs[[3]]$spec$data$url),
+    simplifyDataFrame = FALSE
+  )
+)
+vegalite(specs[[3]]$spec)
+
+# across all with json data
+specs_local <- lapply(
+  specs,
+  function(spec){
+    if("url" %in% names(spec$spec$data)){
+      spec$spec$data <- list(
+        values = jsonlite::fromJSON(
+          paste0(
+            "http://vega.github.io/vega-editor/app/",
+            spec$spec$data$url
+          ),
+          simplifyDataFrame = FALSE
+        )
+      )
+    }
+    spec
+  }
+)
+
+browsable(tagList(
+  lapply(specs_local,function(spec){vegalite(spec$spec)})
+))
+
+
 }
 
